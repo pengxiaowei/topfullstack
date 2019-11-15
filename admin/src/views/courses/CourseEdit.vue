@@ -40,6 +40,7 @@ export default class CourseEdit extends Vue {
   created() {
     !this.isnew && this.fetch();
   }
+  
 }
 </script>
 

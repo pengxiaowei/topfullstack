@@ -12,14 +12,15 @@
             <el-menu-item
               v-for="(subItem, subIndex) in item.items"
               :key="`menu-item-${index}-${subIndex}`"
-              :index="subItem.path">
-              {{subItem.title}}
-              </el-menu-item>
+              :index="subItem.path"
+            >{{subItem.title}}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header>全栈之巅 - 后台管理界面</el-header>
+        <el-header>
+          <h3>全栈之巅 - 后台管理界面</h3>
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -48,7 +49,7 @@ export default class Main extends Vue {
           },
           {
             title: "课时管理",
-            path: "/courses/list"
+            path: "/episodes/list"
           }
         ]
       },
