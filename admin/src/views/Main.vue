@@ -22,7 +22,7 @@
           <h3>全栈之巅 - 后台管理界面</h3>
         </el-header>
         <el-main>
-          <router-view></router-view>
+          <router-view :key='Math.random()+1213214545'></router-view>
         </el-main>
       </el-container>
     </el-container>

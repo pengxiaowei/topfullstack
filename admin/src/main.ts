@@ -12,9 +12,11 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$http = axios.create({
-  baseURL: 'http://localhost:3002'
+const http = axios.create({
+  baseURL: process.env.VUE_APP_API_URL
 })
+Vue.prototype.$httpajax = http  //给avue上传使用的
+Vue.prototype.$http = http    //给平时请求接口使用的
 
 
 new Vue({

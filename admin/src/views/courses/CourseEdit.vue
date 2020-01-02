@@ -11,7 +11,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component({})
 export default class CourseEdit extends Vue {
   data = {};
-  @Prop(String) id: string;
+  @Prop(String) id !: string;
 
   fields = {
     _id: { label: "ID" },
@@ -40,7 +40,6 @@ export default class CourseEdit extends Vue {
   created() {
     !this.isnew && this.fetch();
   }
-  
 }
 </script>
 

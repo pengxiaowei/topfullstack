@@ -9,6 +9,8 @@
       @row-del="remove"
       :page="page"
       @on-load="changePage"
+      @sort-change="sortChange"
+      @search-change="search"
     ></avue-crud>
   </div>
 </template>
@@ -18,7 +20,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({})
 export default class ResourceList extends Vue {
-  @Prop(String) resource: string;
+  @Prop(String) resource !: string;
   data: any = {};
   option: any = {};
   page: any = {
@@ -53,6 +55,7 @@ export default class ResourceList extends Vue {
   }
 
   async create(row, done, loading) {
+    // global.console.log(row)
     await this.$http.post(`${this.resource}`, row);
     this.$message.success("创建成功");
     this.fetch();
@@ -76,6 +79,29 @@ export default class ResourceList extends Vue {
   async changePage({ pageSize, currentPage }) {
     this.query.page = currentPage;
     this.query.limit = pageSize;
+    this.fetch();
+  }
+
+  async sortChange({ order, prop }) {
+    // global.console.log(params);
+    if (!order) {
+      this.query.sort = null;
+    } else {
+      this.query.sort = {
+        [prop]: order === "ascending" ? 1 : -1
+      };
+    }
+    this.fetch();
+  }
+
+  async search(where) {
+    for (let k in where) {
+      const field = this.option.column.find(v => v.prop === k);
+      if (field.regex) {
+        where[k] = { $regex: where[k] };
+      }
+    }
+    this.query.where = where;
     this.fetch();
   }
 
